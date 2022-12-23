@@ -46,6 +46,7 @@ form {
 label {
   display: flex;
   flex-direction: column;
+  margin-bottom: 1em;
 }
 
 label span {
@@ -58,7 +59,7 @@ input,
 textarea {
   box-sizing: border-box;
   border: none;
-  border-bottom: 1px bottom #ccc;
+  border-bottom: 1px solid #ccc;
   padding: .8em 0;
   background-color: transparent;
 }
