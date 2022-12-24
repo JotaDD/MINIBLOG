@@ -1,6 +1,5 @@
 import styles from "./Register.module.css"
 
-
 import { useState, useEffect } from "react"
 import { useAuthentication } from "../../hooks/useAuthentication"
 import Loading from "../../components/Loading"
@@ -102,9 +101,9 @@ const Register = () => {
 						onChange={handleConfirmPassword}
 					/>
 				</label>
-				<button className='btn'>Cadastrar</button>
-				{loading && <Loading/> }
-
+				{!loading && <button className='btn'>Cadastrar</button>}
+				{loading && <button className='btn' disabled >Aguarde...</button>}
+				{/* {loading && <Loading />} */}
 				{error && <p className='error'>{error}</p>}
 			</form>
 		</div>
