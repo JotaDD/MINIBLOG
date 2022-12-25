@@ -30,7 +30,7 @@ export const useAuthentication = () => {
 		checkIfIsCancelled()
 
 		setLoading(true)
-    setError(null)
+		setError(null)
 
 		try {
 			const { user } = await createUserWithEmailAndPassword(
@@ -42,13 +42,16 @@ export const useAuthentication = () => {
 			await updateProfile(user, {
 				displayName: data.displayName,
 			})
+
+			setLoading(false)
+			
 			return user
 		} catch (error) {
 			console.log(error.message)
 			console.log(typeof error.message)
-
+			
 			let systemErrorMessage
-
+			
 			if (error.message.includes("Password")) {
 				systemErrorMessage = "A senha deve conter pelo menos 6 caracteres"
 			} else if (error.message.includes("email-already")) {
@@ -56,10 +59,10 @@ export const useAuthentication = () => {
 			} else {
 				systemErrorMessage = "Ocorreu um erro, por favor tente mais tarde."
 			}
-
-      setError(systemErrorMessage)
+			
+			setLoading(false)
+			setError(systemErrorMessage)
 		}
-		setLoading(false)
 	}
 	useEffect(() => {
 		return setCancelled(true)
