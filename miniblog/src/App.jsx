@@ -32,19 +32,17 @@ function App() {
 	const [user, setUser] = useState(undefined)
 	const { auth } = useAuthentication()
 
-	const loadingUser = user == undefined
+	const loadingUser = user === undefined
 
-	if (loadingUser) {
-		console.log(loadingUser)
-		return <Loading />
-	}
-	
 	useEffect(() => {
 		onAuthStateChanged(auth, (user) => {
 			setUser(user)
 		})
 	}, [auth])
 
+	if (loadingUser) {
+		return <Loading />
+	}
 	return (
 		<div className='App'>
 			<AuthProvider value={{ user }}>
