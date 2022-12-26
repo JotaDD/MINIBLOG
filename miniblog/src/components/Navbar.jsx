@@ -3,6 +3,7 @@ import styles from "./Navbar.module.css"
 
 import { useAuthentication } from "../hooks/useAuthentication"
 import { useAuthValue } from "../context/AuthContext"
+import {user} from '../pages/Register'
 
 const Navbar = () => {
 	const { user } = useAuthValue()
@@ -14,6 +15,9 @@ const Navbar = () => {
 				Mini<span>BLOG</span>
 			</NavLink>
 			<ul className={styles.links_list}>
+				{user&& (
+					<li>Bem vindo {user.displayName}</li>
+				)}
 				<li>
 					<NavLink
 						to='/'
