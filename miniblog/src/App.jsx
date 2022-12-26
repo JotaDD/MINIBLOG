@@ -4,6 +4,7 @@ import {
 	Route,
 	Navigate,
 	Router,
+	Link,
 } from "react-router-dom"
 import { onAuthStateChanged } from "firebase/auth"
 
@@ -33,15 +34,16 @@ function App() {
 
 	const loadingUser = user == undefined
 
+	if (loadingUser) {
+		console.log(loadingUser)
+		return <Loading />
+	}
+	
 	useEffect(() => {
 		onAuthStateChanged(auth, (user) => {
 			setUser(user)
 		})
 	}, [auth])
-
-	if (loadingUser) {
-		return <Loading />
-	}
 
 	return (
 		<div className='App'>
