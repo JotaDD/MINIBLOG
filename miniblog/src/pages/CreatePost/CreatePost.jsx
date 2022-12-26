@@ -1,21 +1,45 @@
 import styles from "./CreatePost.module.css"
 
 import { useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { Navigate, useNavigate } from "react-router-dom"
 import { useAuthValue } from "../../context/AuthContext"
 import { useAuthentication } from "../../hooks/useAuthentication"
+import { useInsertDocument } from "../../hooks/useInsertDocument"
 
 const CreatePost = () => {
-	const [title, setTitle] = useState()
-	const [image, setImage] = useState()
-	const [body, setBody] = useState()
-	const [tags, setTags] = useState()
+	const [title, setTitle] = useState('')
+	const [image, setImage] = useState('')
+	const [body, setBody] = useState('')
+	const [tags, setTags] = useState([])
 	const [formError, setFormError] = useState()
+
+	const { user } = useAuthValue()
 
 	const { loading, error } = useAuthentication()
 
+	const { insertDocument, response } = useInsertDocument("posts")
+
 	const handleSubmit = (event) => {
 		event.preventDefault()
+		setFormError("")
+
+		// validate image URL
+
+		// add Array of tags
+
+		//check all values
+
+		insertDocument({
+			title,
+			image,
+			body,
+			tags,
+			uid: user.uid,
+			createdBy: user.displayName,
+		})
+
+		// redirect
+		Navigate("/")
 	}
 
 	const handleTitle = (event) => {
