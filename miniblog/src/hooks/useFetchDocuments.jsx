@@ -30,12 +30,19 @@ export const useFetchDocuments = (docCollection, search = null, uid = null) => {
 
 				// Busca
 				// Dashboard
+				if (search) {
+					q = await query(
+						collectionRef,
+						where("tags", "array-contains", search),
+						orderBy("createdAt", "desc")
+					)
+				} else {
+					q = await query(collectionRef, orderBy("createdAt", "desc"))
+				}
 
-				q = await query(collectionRef, orderBy("createdAt", "desc"))
-
-				await onSnapshot(q, (QuerySnapshot) => {
+				await onSnapshot(q, (querySnapshot) => {
 					setDocuments(
-						QuerySnapshot.docs.map((doc) => ({
+						querySnapshot.docs.map((doc) => ({
 							id: doc.id,
 							...doc.data(),
 						}))
@@ -54,5 +61,5 @@ export const useFetchDocuments = (docCollection, search = null, uid = null) => {
 		loadData()
 	}, [docCollection, search, uid, cancelled])
 
-  return {documents, loading, error}
+	return { documents, loading, error }
 }
