@@ -4,12 +4,15 @@ import styles from "./Home.module.css"
 // hooks
 import { useNavigate, Link } from "react-router-dom"
 import { useState } from "react"
+import { useFetchDocuments } from "../../hooks/useFetchDocuments"
 
 // components
+import Loading from "../../components/Loading"
+import PostDetail from "../../components/PostDetail"
 
 const Home = () => {
 	const [query, setQuery] = useState("")
-	const [posts] = useState([])
+	const { documents: posts, loading } = useFetchDocuments("posts")
 
 	const handleSubmit = (event) => {
 		event.preventDefault()
@@ -29,11 +32,17 @@ const Home = () => {
 				</button>
 			</form>
 			<div>
-				<h1>Posts...</h1>
+				{loading && <Loading />}
+				{posts && posts.map((post) => (
+					<PostDetail key={post.id} post={post}/>
+					))
+				}
 				{posts && posts.length === 0 && (
 					<div className={styles.noposts}>
 						<p>Não foram encontrados posts</p>
-						<Link to='/posts/create' className="btn"> Criar primeiro post</Link>
+						<Link to='/posts/create' className='btn'>
+							Criar primeiro post
+						</Link>
 					</div>
 				)}
 			</div>
