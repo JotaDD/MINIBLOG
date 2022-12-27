@@ -4,12 +4,12 @@ import { Link } from "react-router-dom"
 
 const PostDetail = ({ post }) => {
 	return (
-		<div>
+		<div className={styles.post_detail}>
 			<img src={post.image} alt={post.title} />
 			<h2>{post.title}</h2>
-			<p>{post.createdBy}</p>
+			<p className={styles.createdBy}>{post.createdBy}</p>
 			<p>{post.body}</p>
-			<div>
+			<div className={styles.tags}>
 				{post.tagsArray.map((tag) => (
 					<p key={tag}>
 						<span>#</span>
@@ -17,7 +17,9 @@ const PostDetail = ({ post }) => {
 					</p>
 				))}
 			</div>
-      <Link to={`/posts/${post.id}`}  className="btn btn-outline" >Ler</Link>
+			<Link to={`/posts/${post.id}`} className='btn btn-outline'>
+				Ler
+			</Link>
 		</div>
 	)
 }
