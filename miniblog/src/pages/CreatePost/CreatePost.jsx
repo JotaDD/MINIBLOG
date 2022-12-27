@@ -39,7 +39,7 @@ const CreatePost = () => {
 		})
 
 		// redirect
-		Navigate("/")
+
 	}
 
 	const handleTitle = (event) => {
@@ -106,13 +106,13 @@ const CreatePost = () => {
 						value={tags}
 					/>
 				</label>
-				{!loading && <button className='btn'>Postar</button>}
-				{loading && (
+				{!response.loading && <button className='btn'>Postar</button>}
+				{response.loading && (
 					<button className='btn' disabled>
 						Aguarde...
 					</button>
 				)}
-				{error && <p className='error'>{error}</p>}
+				{response.error && <p className='error'>{response.error}</p>}
 			</form>
 		</div>
 	)
