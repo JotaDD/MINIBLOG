@@ -2,3 +2,9 @@
   min-height: 60vh;
   margin-bottom: 5em;
 }
+.post-list {
+display: flex;
+flex-direction: column;
+
+margin: 0 30% 0 30%;
+}

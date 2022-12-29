@@ -1,5 +1,6 @@
 .post_detail {
   margin-bottom: 2em;
+  
 }
 
 .post_detail img {
@@ -8,6 +9,10 @@
 
 .post_detail h2 {
   margin-bottom: .4em;
+}
+
+.body  {
+  max-width: 75%;
 }
 
 .post_detail .tags {
